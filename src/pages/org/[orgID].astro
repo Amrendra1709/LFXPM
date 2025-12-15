@@ -1,0 +1,88 @@
+---
+export const prerender = true;
+
+import Layout from "../../layouts/Layout.astro";
+import { ProjectNavbar } from "../../components/organization/ProjectNavbar";
+import Graph from "../../components/organization/Graph.astro";
+
+// Get all the organization IDs and render the page for them
+export async function getStaticPaths() {
+  const API_BASE_URL = import.meta.env.API_BASE_URL;
+  const response = await fetch(`${API_BASE_URL}/orgs`);
+  const allOrganizations = await response.json();
+
+  return allOrganizations.map((org: Organization) => ({
+    params: {
+      orgID: org.id,
+    },
+  }));
+}
+
+// Render the content of the page by making the relevant requests
+const { orgID } = Astro.params;
+
+const API_BASE_URL = import.meta.env.API_BASE_URL;
+const orgResponse = await fetch(`${API_BASE_URL}/orgs/${orgID}`);
+const orgData = await orgResponse.json();
+
+const projectResponse = await fetch(`${API_BASE_URL}/orgs/${orgID}/projects/`);
+const projectData = (await projectResponse.json()).projects;
+---
+
+<Layout title={orgData.org}>
+  <div
+    class="flex flex-col lg:flex-row items-center justify-center gap-2 mx-auto p-2"
+  >
+    <!-- Vertical column 1 containing the image and organization description-->
+    <div
+      class="text-white flex flex-col items-center justify-center gap-4 lg:w-1/2"
+    >
+      <div class="border border-white p-2 rounded-3xl bg-white">
+        <img
+          src={orgData.logo}
+          alt={`Logo for the organization ${orgData.org}`}
+          class="object-cover h-24"
+        />
+      </div>
+      <h1 class="text-3xl font-semibold">{orgData.org}</h1>
+      <p class="text-white text-md opacity-80 m-4 p-4">
+        {orgData.desc}
+      </p>
+    </div>
+
+    <!-- Column 2 contains the graph -->
+    <div class="lg:w-1/2 w-full mx-auto py-4 px-8 items-center">
+      <Graph projects={projectData} />
+    </div>
+  </div>
+
+  <!-- Past Projects Heading -->
+  <div>
+    <h1 class="text-white text-center text-4xl font-semibold pt-16 pb-[50px]">
+      Past Projects
+    </h1>
+    <div class="codeBlock absolute"></div>
+  </div>
+
+  <ProjectNavbar allProjects={projectData} client:only="react" />
+</Layout>
+
+<style is:global>
+  .codeBlock {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    left: calc(50% - 150px / 2 - 78px);
+    top: calc(50% - 150.05px / 2 - 47.47px);
+    border-radius: 100%;
+    background: linear-gradient(
+      118.19deg,
+      #02101a -3.62%,
+      hsl(210, 94%, 21%) 55.44%,
+      #0077cc 110.51%
+    );
+    opacity: 0.2;
+    filter: blur(34px);
+    transform: matrix(1, 0, -0.03, 1, 0, 0);
+  }
+</style>

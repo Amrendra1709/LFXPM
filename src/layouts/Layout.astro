@@ -1,0 +1,150 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="LFX Mentorship is a project that provides you deep insights into the organizations and projects that come as a part of the famous LFX Mentorship. You can use this website to see the frequency of the organizations in the various terms of the mentorship as well as the details and tech stack related to these projects."
+    />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta
+      property="og:description"
+      content="A project to help you analyze LFX organizations and projects across the years"
+    />
+    <meta property="og:site_name" content="LFX Mentorship" />
+    <meta property="og:image" content="/logo.png" />
+    <meta
+      property="og:image:alt"
+      content="Logo showing LFX Mentorship written in a circular boundary"
+    />
+    <meta property="og:locale" content="en_US" />
+    <meta property="twitter:title" content="EshaanAgg" />
+    <meta property="twitter:url" content="https://x.com/eshaanagg" />
+
+    <meta name="author" content="Eshaan Aggarwal" />
+    <meta name="generator" content={Astro.generator} />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+
+    <title>{title}</title>
+  </head>
+  <!-- Google Tag script to drive analytics about the site -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-P16F97X138"
+  ></script>
+  <script>
+    // @ts-nocheck
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+    gtag("config", "G-P16F97X138");
+  </script>
+
+  <body class="bg-dark-blue">
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style is:global>
+  * {
+    padding: 0;
+    margin: 0;
+  }
+
+  @font-face {
+    font-family: "Rajdhani";
+    src: url("/fonts/Rajdhani-Regular.ttf");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Orbitron";
+    src: url("/fonts/Orbitron-Bold.ttf");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  .openDrawer {
+    transform: translateX(0);
+  }
+
+  #allSkillsDrawer {
+    position: fixed;
+    z-index: 110;
+  }
+
+  #filterDrawer {
+    position: fixed;
+    z-index: 100;
+  }
+
+  .card {
+    transition-duration: 0.125s;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(50, 113, 113);
+    border: 2px solid #07c e7;
+    z-index: 2;
+  }
+
+  .card:hover {
+    transform: scale(1.01);
+    box-shadow: 0 0 10px rgba(69, 193, 255, 0.589);
+    border: 3px solid #fff;
+  }
+
+  .viewDetail {
+    transition-duration: 0.3s;
+  }
+
+  .viewDetail:hover {
+    transform: scale(1.05);
+    color: rgb(3 105 161);
+  }
+
+  .viewDetail {
+    --clr: #fff;
+    --outline: 2px solid var(--clr);
+    color: var(--clr);
+    outline: var(--outline);
+    border: var(--outline);
+    outline-offset: -2px;
+    transition: outline-offset 200ms;
+    border-radius: 20px;
+    padding: 8px;
+  }
+
+  .viewDetail:hover,
+  .viewDetail:focus {
+    outline: var(--outline);
+    outline-offset: 2px;
+  }
+</style>

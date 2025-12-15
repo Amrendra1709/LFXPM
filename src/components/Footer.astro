@@ -1,0 +1,250 @@
+---
+import { Image } from "astro:assets";
+import COPSLogo from "../assets/images/cops_logo.png";
+
+const socialMediaIcons = [
+  {
+    name: "YouTube",
+    url: "https://www.youtube.com/channel/UC01TZlNfu29QgG4FmUqVsdg/",
+    icon: "fa-brands fa-youtube fa-xl",
+  },
+  {
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/company/cops-iitbhu/",
+    icon: "fa-brands fa-linkedin fa-xl",
+  },
+  {
+    name: "Instagram",
+    url: "https://www.instagram.com/cops.iitbhu/",
+    icon: "fa-brands fa-instagram fa-xl",
+  },
+  {
+    name: "Twitter",
+    url: "https://twitter.com/cops_iitbhu/",
+    icon: "fa-brands fa-twitter fa-xl",
+  },
+  {
+    name: "GitHub",
+    url: "https://github.com/COPS-IITBHU/",
+    icon: "fa-brands fa-github fa-xl",
+  },
+  {
+    name: "Hashnode",
+    url: "https://hashnode.com/@COPSIITBHU/",
+    icon: "fa-brands fa-hashnode fa-xl",
+  },
+];
+---
+
+<footer
+  class="bg-dark-blue mt-10 border-solid border-t-2 border-highlight-blue"
+>
+  <div class="mx-auto w-full max-w-screen-xl p-4">
+    <div class="md:flex md:justify-between">
+      <div class="mb-6 md:mb-0">
+        <a href="/" class="flex items-center" target="_blank">
+          <span
+            class="font-header self-center text-3xl font-semibold whitespace-nowrap text-white"
+            >LFX Mentorship</span
+          >
+        </a>
+      </div>
+    </div>
+
+    <div class="pt-2">
+      <p class="text-white text-lg font-subHeader">
+        This is an OpenSource project developed by the students at IIT BHU. If
+        this project helped you, we would greatly appreciate a <a
+          href="https://github.com/EshaanAgg/LFXMM-Frontend"
+          class="hover:opacity-80 duration-200 underline underline-offset-8"
+          ><i class="fa fa-star underline underline-offset-8"></i>
+           on GitHub.</a
+        >
+      </p>
+    </div>
+
+    <hr class="my-6 sm:mx-auto border-highlight-blue lg:my-8 border-t-2" />
+
+    <div
+      class="flex gap-2 items-center justify-between flex-col sm:items-end sm:flex-row md:items-center md:justify-between"
+    >
+      <span
+        class="font-subheader text-xl text-gray-500 text-center dark:text-gray-400"
+      >
+        <a
+          href="https://www.copsiitbhu.co.in/"
+          target="_blank"
+          class="hover:opacity-70 duration-200"
+        >
+          <Image
+            class="logo-camera"
+            src={COPSLogo}
+            alt="COPS Logo"
+            width={200}
+            height={200}
+          />
+        </a>
+      </span>
+
+      <span class="text-3xl text-gray-500 text-center dark:text-gray-400">
+        <a href="https://sdg.copsiitbhu.co.in/" class="glitch" target="_blank">
+          <span class="mainText skew"
+            >COPS SDG
+            <span class="backText glitch">COPS SDG</span>
+          </span>
+        </a>
+      </span>
+
+      <!-- Social Media Icons -->
+      <div class="flex mt-4 space-x-5 justify-center sm:mt-0">
+        {
+          socialMediaIcons.map((item) => (
+            <a
+              href={item.url}
+              target="_blank"
+              class="text-gray-500 hover:text-blue-700 duration-200 hover:scale-150"
+            >
+              <i class={item.icon} />
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  /* Logo Camera */
+  .logo-camera {
+    padding: 5px;
+    border: 5px solid #00101b;
+  }
+
+  .logo-camera:hover {
+    border-top: 5px solid #42fffc;
+    border-bottom: 5px solid #42fffc;
+    transition-duration: 500ms;
+    transform-origin: left;
+  }
+
+  /* Footer blinking */
+  hr {
+    animation-name: blink;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    box-shadow: 0 0 20px 5px #0077cc;
+    animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+  }
+
+  @keyframes blink {
+    0% {
+      opacity: 100%;
+    }
+    50% {
+      opacity: 10%;
+    }
+    100% {
+      opacity: 100%;
+    }
+  }
+
+  .glitch {
+    position: relative;
+    text-align: center;
+    line-height: 1.4em;
+  }
+
+  .mainText {
+    position: relative;
+    display: inline-block;
+    opacity: 0.7;
+    font-family: "Orbitron", sans-serif;
+  }
+
+  .backText {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    opacity: 0.3;
+    display: inline-block;
+    font-family: "Orbitron", sans-serif;
+  }
+
+  .skew {
+    animation: skew 0.95s infinite alternate;
+  }
+
+  .glitch {
+    animation: glitch 0.8s infinite alternate;
+  }
+
+  @keyframes skew {
+    0% {
+      transform: skew(0deg);
+    }
+    20% {
+      transform: skew(0deg);
+    }
+    24% {
+      transform: skew(-7deg);
+    }
+    28% {
+      transform: skew(0deg);
+    }
+    70% {
+      transform: skew(0deg);
+    }
+    74% {
+      transform: skew(10deg);
+    }
+    78% {
+      transform: skew(0deg);
+    }
+    100% {
+      transform: skew(0deg);
+    }
+  }
+
+  @keyframes glitch {
+    0% {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+    20% {
+      transform: translate3d(0, 0, 0);
+      opacity: 0.3;
+    }
+    24% {
+      transform: translate3d(5px, 4px, 0);
+      opacity: 1;
+    }
+    28% {
+      transform: translate3d(0, 0, 0);
+    }
+    60% {
+      transform: translate3d(0, 0, 0);
+    }
+    64% {
+      transform: translate3d(-4px, -3px, 0);
+    }
+    68% {
+      transform: translate3d(0, 0, 0);
+    }
+    70% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+    74% {
+      opacity: 0.3;
+      transform: translate3d(10px, -6px, 0);
+    }
+    78% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+</style>
